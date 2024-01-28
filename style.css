@@ -89,3 +89,9 @@ main{
 .AdditionalInfo > div > div{
 
 }
+footer{
+    font-size: 0.4em;
+    text-align: center;
+    width: 100%;
+    color: grey;
+}
