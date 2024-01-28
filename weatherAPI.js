@@ -3,7 +3,7 @@ const city = 'Ohrid';
 const lat = 41.1231;
 const lon = 20.8016;
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-const airQualityURL = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+const airQualityURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
 const daysOfWeek = ["Недела", "Понеделник", "Вторник", "Среда", "Четврток", "Петок", "Сабота"];
 var isNight = false;
 function kelvinToCelsius(kelvin) {
