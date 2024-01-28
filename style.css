@@ -61,7 +61,7 @@ main{
 }
 .AdditionalInfo{
     color: #000;
-    margin-top: 60%;
+    margin-top: 50%;
     display: flex;
     width: 90%;
     margin-left: auto;
@@ -90,8 +90,9 @@ main{
 
 }
 footer{
+    margin-top: 10%;
     font-size: 0.4em;
     text-align: center;
     width: 100%;
-    color: grey;
+    color: rgba(128, 128, 128, 0.56);
 }
