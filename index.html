@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohrid Weather</title>
+    <script src="weatherAPI.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="location">
+           <img src="src/location.png" class="icon"> <span>Охрид</span>
+        </div>
+        <div class="TimeAndDay"><span id="Time">11:11</span><span>&nbsp;</span><span id="Day">Monday</span></div>
+    </header>
+    <main>
+        <section class="Temperature">
+            <span id="CurrentTemp">23</span><span><sup>°</sup></span>
+        </section>
+        <section class="Description">
+               <img id="weatherIcon" src="src/sun.png">
+                <span id="desc">It's sunny</span>
+        </section>
+    </main>
+    <div class="AdditionalInfo">
+        <div>
+            <img src="src/windSpeed.png" class="biggerIcon">
+            <p>Wind</p>
+            <span id="WindSpeed"></span>
+        </div>
+        <div>
+            <img src="src/humidity.png" class="biggerIcon">
+            <p>Humidity</p>
+            <span id="Humidity"></span>
+        </div>
+        <div>
+            <img src="src/visibility.png" class="biggerIcon">
+            <p>Visibility</p>
+            <span id="Visibility"></span>
+        </div>
+        <div>
+            <img src="src/airquality.png" class="biggerIcon">
+            <p>AQI</p>
+            <span id="AirQuality"></span>
+        </div>
+    </div>
+    <footer>
+        <div>&copy;Daniel Kostoski 2024. Design by PeroZero</div>
+    </footer>
+</body>
+</html>
