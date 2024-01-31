@@ -1,9 +1,9 @@
 const apiKey = '2352b8c13775feecdba662f5968c275d';
-var city = 'Skopje';
+let city = 'Skopje';
 const lat = 41.1231;
 const lon = 20.8016;
-const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-const airQualityURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&random=${Math.random()}`;
+let airQualityURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}&random=${Math.random()}`;
 const daysOfWeek = ["Недела", "Понеделник", "Вторник", "Среда", "Четврток", "Петок", "Сабота"];
 var isNight = false;
 function kelvinToCelsius(kelvin) {
@@ -102,11 +102,12 @@ function setHumdity(data){
 function setVisibility(data){
     document.getElementById('Visibility').innerHTML = "<div><div>"+data+"</div>"+"<div>km</div></div>";
 }
-function setCity(){
-    document.getElementById("Grad").innerHTML = city;
+function setCity(newcity){
+    city = newcity;
+    document.getElementById("Grad").innerHTML = newcity;
 }
-function fetchData() {
-    fetch(apiUrl)
+function fetchData(url) {
+    fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -114,10 +115,11 @@ function fetchData() {
             return response.json();
         })
         .then(data => {
+            console.log("Fetched data from url: " + url);
             let temp = data.main.temp;
             let desc = data.weather[0].description;
             setBackground(data);
-            setCity();
+            //setCity();
             setIcon(data);
             setVisibility(data.visibility / 1000);
             setWindSpeed(data.wind.speed)
@@ -130,8 +132,8 @@ function fetchData() {
         });
 }
 
-function fetchAQIdata() {
-    fetch(airQualityURL)
+function fetchAQIdata(url) {
+    fetch(url)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
@@ -139,6 +141,7 @@ function fetchAQIdata() {
             return response.json();
         })
         .then(data => {
+            console.log("Fetched data from url: " + url);
             setAirQuality(data);
         })
         .catch(error => {
@@ -148,19 +151,21 @@ function fetchAQIdata() {
 
 document.addEventListener("DOMContentLoaded", ()=>{
     setTimeAndDay();
-    fetchData();
-    fetchAQIdata();
+    fetchData(apiUrl);
+    fetchAQIdata(airQualityURL);
     document.getElementById("SearchButton").addEventListener("click", ()=>{
-        city = document.getElementById('SearchInput').value;
-        fetchData();
-        fetchAQIdata();
+        let newcity = document.getElementById('SearchInput').value;
+        let url = `https://api.openweathermap.org/data/2.5/weather?q=${newcity}&appid=${apiKey}&random=${Math.random()}`;
+        setCity(newcity)
+        fetchData(url);
         document.getElementById('SearchInput').value = "";
     });
-    document.addEventListener("keypress", (key)=>{
-        if(key==='enter'){
-            city = document.getElementById('SearchInput').value;
-            fetchData();
-            fetchAQIdata();
+    document.addEventListener("keydown", (key)=>{
+        if (key.key === 'Enter') {
+            let newcity = document.getElementById('SearchInput').value;
+            let url = `https://api.openweathermap.org/data/2.5/weather?q=${newcity}&appid=${apiKey}&random=${Math.random()}`;
+            setCity(newcity)
+            fetchData(url);
             document.getElementById('SearchInput').value = "";
         }
     });
