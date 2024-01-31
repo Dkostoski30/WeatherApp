@@ -3,16 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ohrid Weather</title>
+    <title>WeatherApp</title>
     <script src="weatherAPI.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="src/sun.png" type="image/x-icon">
 </head>
 <body>
     <header>
         <div class="location">
-           <img src="src/location.png" class="icon"> <span>Охрид</span>
+           <img src="src/location.png" class="icon"> <span id="Grad">Скопје</span>
+            <div class="TimeAndDay"><span id="Time">11:11</span><span>&nbsp;</span><span id="Day">Monday</span></div>
         </div>
-        <div class="TimeAndDay"><span id="Time">11:11</span><span>&nbsp;</span><span id="Day">Monday</span></div>
+        <div class="SearchContainer">
+            <input type="text" id="SearchInput" placeholder="Град"><button id="SearchButton"><img src="src/search.png" class="icon"></button>
+        </div>
     </header>
     <main>
         <section class="Temperature">

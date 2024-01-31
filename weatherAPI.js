@@ -1,9 +1,9 @@
 const apiKey = '2352b8c13775feecdba662f5968c275d';
-const city = 'Ohrid';
+var city = 'Skopje';
 const lat = 41.1231;
 const lon = 20.8016;
 const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-const airQualityURL = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+const airQualityURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
 const daysOfWeek = ["Недела", "Понеделник", "Вторник", "Среда", "Четврток", "Петок", "Сабота"];
 var isNight = false;
 function kelvinToCelsius(kelvin) {
@@ -102,8 +102,10 @@ function setHumdity(data){
 function setVisibility(data){
     document.getElementById('Visibility').innerHTML = "<div><div>"+data+"</div>"+"<div>km</div></div>";
 }
-document.addEventListener("DOMContentLoaded", ()=>{
-    setTimeAndDay();
+function setCity(){
+    document.getElementById("Grad").innerHTML = city;
+}
+function fetchData() {
     fetch(apiUrl)
         .then(response => {
             if (!response.ok) {
@@ -115,8 +117,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
             let temp = data.main.temp;
             let desc = data.weather[0].description;
             setBackground(data);
+            setCity();
             setIcon(data);
-            setVisibility(data.visibility/1000);
+            setVisibility(data.visibility / 1000);
             setWindSpeed(data.wind.speed)
             setHumdity(data.main.humidity);
             setTemperature(temp);
@@ -125,17 +128,40 @@ document.addEventListener("DOMContentLoaded", ()=>{
         .catch(error => {
             console.error('Error fetching data:', error);
         });
+}
+
+function fetchAQIdata() {
     fetch(airQualityURL)
-        .then(response=>{
+        .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             return response.json();
         })
-        .then(data=>{
+        .then(data => {
             setAirQuality(data);
         })
-        .catch(error =>{
-            console.error("Error fetching data: "+error);
+        .catch(error => {
+            console.error("Error fetching data: " + error);
         })
+}
+
+document.addEventListener("DOMContentLoaded", ()=>{
+    setTimeAndDay();
+    fetchData();
+    fetchAQIdata();
+    document.getElementById("SearchButton").addEventListener("click", ()=>{
+        city = document.getElementById('SearchInput').value;
+        fetchData();
+        fetchAQIdata();
+        document.getElementById('SearchInput').value = "";
+    });
+    document.addEventListener("keypress", (key)=>{
+        if(key==='enter'){
+            city = document.getElementById('SearchInput').value;
+            fetchData();
+            fetchAQIdata();
+            document.getElementById('SearchInput').value = "";
+        }
+    });
 });
