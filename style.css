@@ -20,6 +20,7 @@ header{
     padding: 1px 1.2em;
     align-items: flex-start;
     font-size: 1.3em;
+    width: 93%;
 }
 #CurrentTemp{
     background: linear-gradient(to top, rgba(255, 255, 255, 0) 15%, rgba(255, 255, 255, 0.9) 45%);
