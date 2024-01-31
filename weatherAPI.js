@@ -61,7 +61,7 @@ function setBackground(data){
     }else if(isWithinHour(time, sunset.getTime())){
         document.body.style.background = "#FFFF url(\"src/sunsetBackground.png\") no-repeat;";
     //    console.log("Sunset");
-    }else if(time>sunset){
+    }else if(time>sunset || time < sunrise){
         document.body.style.background = "#FFFF url(\"src/moonBackground.png\") no-repeat";
         isNight = true;
     }else{
